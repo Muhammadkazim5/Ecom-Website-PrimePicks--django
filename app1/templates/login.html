@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="p-4 m-4">
+    <div class="col-lg-5 mx-auto border rounded p-4 mb-4 mt-4 shadow-lg">
+      <h3
+        class="alert alert-light border rounded text-center mt-4 mb-4 text-white"
+        style="background: linear-gradient(to bottom, #ffffff 0%, #cc0000 100%)"
+      >
+        Login Here
+      </h3>
+      <form action="/login/" method="POST">
+        {% csrf_token %} {% if error %}
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+        {% endif %}
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="Email"
+            class="form-control form-control-sm"
+            id=""
+            name="email"
+            placeholder="example@gmail.com"
+            value="{{value.email}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="Password"
+            class="form-control form-control-sm"
+            id=""
+            name="password"
+            placeholder="**********"
+          />
+        </div>
+
+        <div class="form-group mt-3">
+          <input
+            type="submit"
+            value="Login"
+            class="btn btn-sm text-white col-lg-4"
+            style="
+              background: linear-gradient(
+                to bottom right,
+                #000000 0%,
+                #ffffff 100%
+              );
+            "
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

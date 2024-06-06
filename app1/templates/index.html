@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block content %} {% load cart %}
+<div class="container-fluid">
+  <div class="row">
+    <div
+      class="col col-lg-2 mx-auto pt-4 border-5 shadow-lg"
+      style="background: linear-gradient(to right, #ff0000 0%, #ffffff 100%)"
+    >
+      <div class="list-group">
+        <a
+          href="/"
+          class="list-group-item list-group-item-action text-center bg-danger text-white fw-bolder"
+          >All PRODUCTS</a
+        >
+        {% for category in categories %}
+        <a
+          href="/?category={{ category.id }}"
+          class="list-group-item list-group-item-action text-center"
+        >
+          {{ category.name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div id="products" class="col-lg-10 mx-auto mt-5">
+      <div class="row mx-auto">
+        {% for product in products %}
+        <div
+          class="card mx-auto mb-5 shadow-lg"
+          id="{{product.id}}"
+          style="width: 18rem"
+          id=""
+        >
+          <img src="{{product.image.url}}" class="card-img-top" />
+          <div class="card-body">
+            <p class="card-title">{{product.name}}</p>
+            <p class="card-text"><b>PKR {{product.price}}</b></p>
+          </div>
+          <div class="cart-footer p-0">
+            {% if product|is_in_cart:request.session.cart %}
+            <div class="row no-gutters">
+              <form action="/#{{product.id}}" method="POST" class="col-2">
+                {% csrf_token %}
+                <input
+                  hidden
+                  type="text"
+                  value="{{product.id}}"
+                  name="product"
+                />
+                <input hidden type="text" value="True" name="remove" />
+                <input
+                  type="submit"
+                  value="-"
+                  class="btn btn-block"
+                  style="
+                    background: linear-gradient(
+                      to right,
+                      #ff0000 0%,
+                      #ffffff 100%
+                    );
+                  "
+                />
+              </form>
+              <div class="text-center col bg-gradient shadow-lg">
+                {{product|cart_quantity:request.session.cart}} in cart
+              </div>
+              <form action="/#{{product.id}}" method="POST" class="col-2">
+                {% csrf_token %}
+                <input
+                  hidden
+                  type="text"
+                  value="{{product.id}}"
+                  name="product"
+                />
+                <input
+                  type="submit"
+                  value="+"
+                  class="btn btn-block"
+                  style="
+                    background: linear-gradient(
+                      to right,
+                      #ff0000 0%,
+                      #ffffff 100%
+                    );
+                  "
+                />
+              </form>
+            </div>
+            {% else %}
+            <form action="/#{{product.id}}" method="POST" class="btn-block">
+              {% csrf_token %}
+              <input hidden type="text" value="{{product.id}}" name="product" />
+              <input
+                class="float-right btn btn-light border form-control text-white"
+                type="submit"
+                style="
+                  background: linear-gradient(
+                    to right,
+                    #ff0000 0%,
+                    #ffffff 100%
+                  );
+                "
+                value="Add To Card"
+              />
+            </form>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

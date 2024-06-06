@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <div class="p-4 m-4">
+    <div class="col-lg-6 mx-auto border rounded p-4 shadow-lg">
+      <h3
+        class="alert alert-light border rounded text-center text-white"
+        style="background: linear-gradient(to bottom, #ffffff 0%, #cc0000 100%)"
+      >
+        Create An Account
+      </h3>
+      <form action="/signup/" method="POST">
+        {% csrf_token %} {% if error %}
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+        {% endif %}
+        <div class="form-group">
+          <label for="firstname" class="form-label">First Name:</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id=""
+            name="firstname"
+            placeholder="First Name"
+            value="{{value.first_name}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastname" class="form-label">Last Name:</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id=""
+            name="lastname"
+            placeholder="Last Name"
+            value="{{value.last_name}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone:</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            id=""
+            name="phone"
+            placeholder="036633338334"
+            value="{{value.phone}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="Email"
+            class="form-control form-control-sm"
+            id=""
+            name="email"
+            placeholder="example@gmail.com"
+            value="{{value.email}}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="Password"
+            class="form-control form-control-sm"
+            id=""
+            name="password"
+            placeholder="**********"
+          />
+        </div>
+
+        <div class="form-group mt-3">
+          <input
+            type="submit"
+            value="Create an Account"
+            class="btn btn-sm text-white"
+            style="
+              background: linear-gradient(
+                to bottom right,
+                #000000 0%,
+                #ffffff 100%
+              );
+            "
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
