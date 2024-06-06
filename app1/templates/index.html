@@ -1,10 +1,24 @@
 {% extends "base.html" %} {% block content %} {% load cart %}
+<style>
+  .carousel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    background: #182b3a;
+    opacity: 0.5;
+    z-index: 1; /* Ensure the overlay is on top */
+  }
+
+  .carousel-item {
+    position: relative;
+    z-index: 0; /* Ensure carousel items are below the overlay */
+  }
+</style>
 <div class="container-fluid">
   <div class="row">
-    <div
-      class="col col-lg-2 mx-auto pt-4 border-5 shadow-lg"
-      style="background: linear-gradient(to right, #ff0000 0%, #ffffff 100%)"
-    >
+    <div class="col col-lg-2 mx-auto pt-4 border-5 shadow-lg">
       <div class="list-group">
         <a
           href="/"
@@ -21,16 +35,124 @@
         {% endfor %}
       </div>
     </div>
-    <div id="products" class="col-lg-10 mx-auto mt-5">
+    <div id="products" class="col-lg-10 mx-auto mt-2">
+      <div class="container mb-3">
+        <div
+          id="carouselExampleDark"
+          class="carousel carousel-dark slide"
+          style="
+            carousel::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              width: 100%;
+              bottom: 0;
+              background: #034a6b;
+              opacity: 0.5;
+            }
+          "
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleDark"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div class="carousel-inner rounded" style="height: 300px">
+            <div class="carousel-item active" data-bs-interval="10000">
+              <img
+                src="https://linkusuponline.com/wp-content/uploads/2019/08/e-commerce-banner-1024x341.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
+              <div class="carousel-caption d-none d-md-block mb-5">
+                <h5 class="fw-bolder fs-2 text-danger">Welcome to Our Shop</h5>
+                <p class="fw-bold fs-4">
+                  Discover the latest trends in fashion.
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img
+                style="object-fit: cover"
+                src="https://www.shutterstock.com/image-vector/ecommerce-website-banner-template-presents-260nw-2252124451.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
+              <div class="carousel-caption d-none d-md-block mb-5">
+                <h5 class="fw-bolder fs-2 text-danger">Welcome to Our Shop</h5>
+                <p class="fw-bold fs-4">
+                  Discover the latest trends in fashion.
+                </p>
+              </div>
+            </div>
+            <div
+              class="carousel-item"
+              style="background-color: rgba(0, 0, 0, 0.5)"
+            >
+              <img
+                style="object-fit: cover"
+                src="https://static.vecteezy.com/system/resources/thumbnails/004/299/835/small/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-free-vector.jpg"
+                class="d-block w-100 h-100 object-fit-cover"
+                alt="..."
+              />
+              <div class="carousel-caption d-none d-md-block mb-4">
+                <h5 class="fw-bolder fs-2 text-danger">Welcome to Our Shop</h5>
+                <p class="fw-bold fs-4">
+                  Discover the latest trends in fashion.
+                </p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
       <div class="row mx-auto">
         {% for product in products %}
         <div
-          class="card mx-auto mb-5 shadow-lg"
+          class="card mx-auto mb-5 shadow-lg pt-2"
           id="{{product.id}}"
           style="width: 18rem"
           id=""
         >
-          <img src="{{product.image.url}}" class="card-img-top" />
+          <img
+            src="{{product.image.url}}"
+            class="card-img-top img-thumbnail border-danger"
+          />
           <div class="card-body">
             <p class="card-title">{{product.name}}</p>
             <p class="card-text"><b>PKR {{product.price}}</b></p>
